@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "practice_doubleLinkedList",
+        "practice_circularLinkedList",
+        "practice_linkedListQuestions"
+    ]
+}

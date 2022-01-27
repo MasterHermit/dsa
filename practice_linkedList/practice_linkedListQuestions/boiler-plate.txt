@@ -1,0 +1,32 @@
+ public class node {
+        int data;
+        node next;
+
+        public node(int data) {
+            this.data = data;
+        }
+
+    }
+
+    //main 
+     public void add(int data) {
+        node newn = new node(data);
+        if (head == null) {
+            head = newn;
+            tail = newn;
+
+        }
+        tail.next = newn;
+        tail = newn;
+
+    }
+    
+    public void display() {
+        node cur = head;
+        if (head == null)
+            return;
+        while (cur != null) {
+            System.out.println(cur.data);
+            cur = cur.next;
+        }
+    }
