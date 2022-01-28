@@ -1,15 +1,6 @@
 import java.util.*;
 
 public class LeetCodeNextGreaterElem2 {
-    public static void main(String[] args) {
-        int[] nums = { 10, 12, 9, 13, 7, 6 };
-
-        int[] arr = nextGreaterElements(nums);
-        for (int i : arr) {
-            System.out.println(i);
-        }
-    }
-
     public static int[] nextGreaterElements(int[] nums) {
         Stack<Integer> st = new Stack<>();
         int n = nums.length;
@@ -27,6 +18,15 @@ public class LeetCodeNextGreaterElem2 {
             st.push(nums[i]);
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = { 10, 12, 9, 13, 7, 6 };
+
+        int[] arr = nextGreaterElements(nums);
+        for (int i : arr) {
+            System.out.println(i);
+        }
     }
 
 }
