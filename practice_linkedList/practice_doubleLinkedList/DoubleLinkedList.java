@@ -33,6 +33,7 @@ public class DoubleLinkedList {
             head = tail = newn;
             head.prev = null;
             tail.next = null;
+            return;
         }
 
         newn.next = head;
