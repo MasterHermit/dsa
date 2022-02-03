@@ -1,0 +1,45 @@
+=> Detecting start of a loop in singly Linked List:
+
+As we have learnt above, we can detect with the help of our beloved cars(i.e slowPointer and fastPointer) that if a loop is present in the given Linked List.
+
+Recommended: Please try out this problem on CodeStudio, before moving on to the solution
+
+What we need to do in case we need the starting point of the loop?
+
+Once we know for sure that a loop is present.
+Move the slowPointer to start of the list,(i.e headNode) and let fastPointer remain there at the meeting point.
+Now move both the pointers one node at a time(Yes! You heard it right. Now even fastPointer moves at one node at a time).
+The point where both pointers will meet is our required start of the loop.
+By now it had already started itching in mind that, Why the hell does moving slowPointer to start of the list and moving both pointer one step at a time will find the start of the loop? (insert some angry smiley).
+
+For that we have a small proof, which will explain everything in a jiffy. Trust me! 
+
+
+Distance travelled by slowPointer before meeting= x + y
+Distance travelled by fastPointer before meeting = (x + y + z) + y
+= x + 2y + z
+
+Since fastPointer travels with double the speed of slowPointer, and time is constant for both when the reach the meeting point. So by using simple speed, time and distance relation.
+
+2(x+y)= x+2y+z
+=> x+2y+z = 2x+2y
+=> x=z
+So by moving slowPointer to start of linked list, and making both slowPointer and fastPointer to move one node at a time, they both will reach at the point where the loop starts in the linked list.
+As you will notice the below code is mostly the same as of above code where we needed to detect, whether a loop is present or not, and then if a loop is there we move forward to tracing its starting location.
+
+
+=>Removing the loop in Linked list is simple, after identifying the loop node,
+
+ we just require the previous node of the loop node,
+  So that we can set it to NULL. For identifying the previous node of the loop node,
+   we will keep the previous Pointer pointing to just the previous node of the loop node.
+
+Recommended: Please try out this problem on CodeStudio, before moving on to the solution
+
+CASE 1: When the meeting node of both pointers in a loop is start node or root node itself,
+ in this case by just setting previousPointer to NULL will work because previousPointer is already 
+ pointing to the last node of the linked list.
+
+CASE 2: When the meeting node of both pointers in a loop is in-between the linked list,
+ in this case, the first task is to identify the start of loop node in the way as we saw above and then by setting fastPointer, 
+ which is already pointing to last node of the list to NULL will work.

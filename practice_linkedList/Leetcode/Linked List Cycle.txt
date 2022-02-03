@@ -1,0 +1,96 @@
+Method 1
+
+->create a dummy node
+->traverse the list after each traversal refer that nodes next to dummy node
+->if we encounter theres already a connection to dummy node from that we can say a cycle or loop exist.
+
+code:-
+
+   public boolean hasCycle(ListNode head) {
+        
+        
+        ListNode temp=new ListNode();
+        ListNode cur=head;
+        while(cur!=null ){
+            if(cur==null || cur.next==null)return false;
+            
+            ListNode t=cur.next;
+            cur.next=temp;
+            cur=t;
+            if(cur.next==temp) return true;
+            
+            
+        }
+      
+        return false;
+    }
+}
+
+METHOD 2(Using hashSet)
+
+->traverse the whole list
+->check if hashset contains the node value , return true 
+->else add that node value to set.
+->if we reach end of the loop , return false
+
+code:-
+
+   public boolean hasCycle(ListNode head) {
+        HashSet<ListNode> hs=new HashSet<>();
+        ListNode cur=head;
+        for(ListNode i=head;i!=null;i=i.next)
+        {
+            if(hs.contains(i)) return true;
+            hs.add(i);
+        }
+        
+        return false;
+    }
+        
+METHOD 3 (Using Two Pointer fast and slow) // tortoise & rabit algo or floyd's cycle
+
+->take two pointers,intialize them both as head
+->run a loop till fast!=null && fast.next!=null
+->increament fast=fast.next.next & slow=slow.next;
+->check if slow==fast , return true 
+->else false
+
+code:-
+public boolean hasCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+		
+        while(fast!= null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+			
+            if(slow == fast){
+                return true; //cycle detected
+            }
+        }
+        return false; //cycle is not detected in the LL
+        }
+
+
+=>if asked to return the node where cycle begins use a HashMap
+
+code:-
+
+  public ListNode detectCycle(ListNode head) {
+        HashMap<ListNode,Integer>hm=new HashMap<>();
+        int c=0;
+        if(head==null || head.next==null) return null;
+        
+        for(ListNode i=head;i!=null;i=i.next){
+            if(hm.containsKey(i))
+            {
+                return i;
+            }
+            
+                hm.put(i,c);
+            c++;
+            
+        }
+        return null;
+        
+    }

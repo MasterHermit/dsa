@@ -1,0 +1,13 @@
+ public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        HashSet<ListNode>s=new HashSet<>();
+        if(headA==null || headB==null)return null;
+        for(ListNode i=headA;i!=null;i=i.next){
+            s.add(i);
+            
+        }
+        for(ListNode i=headB;i!=null;i=i.next){
+            if(s.contains(i)) return i;
+          
+        }
+        return null;
+    }

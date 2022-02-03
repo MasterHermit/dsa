@@ -1,0 +1,31 @@
+      ListNode counter =head;
+        int len=0;
+        while(counter!=null)
+        {
+            counter=counter.next;
+            len++;
+            
+        }
+        //check if k is greater than total len than it cant be swaped
+        if(k>len) return head;
+        //getting first node whose val will be swaped
+        ListNode fswap=head;
+        for(int i=1;i<k;i++)
+        {
+            fswap=fswap.next;
+            
+        }
+        //getting last node with whome it will be swap
+        ListNode lswap=head;
+        for(int i=0;i<(len-k);i++)
+        {
+            lswap=lswap.next;
+        }
+        //swapping their values
+        int temp=fswap.val;
+        fswap.val=lswap.val;
+        lswap.val=temp;
+        
+        return head;
+        
+    
