@@ -1,3 +1,4 @@
+//infitq (2021)
 import  java.util.*;
 
 public class MaxCircularSubArray {
@@ -25,11 +26,9 @@ return res;
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
-        }
+     
+        int[] a = {8,-8,9,-9,10,-11,12};
+       
         int value=maxSubArrayOverAll(a);
         System.out.println(value);
          
