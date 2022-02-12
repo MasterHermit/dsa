@@ -1,47 +1,32 @@
 import java.util.*;
 public class ThreeSum {
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        int n=sc.nextInt();
-        int t=sc.nextInt();
-        int[] a=new int[n];
-       
-        for(int i=0;i<n;i++)
-        {
-            a[i]=sc.nextInt();
-        }
-        Arrays.sort(a);
-        for(int i=0;i<n;i++)
-        System.out.println(a[i]);
-       
-        int csum=Integer.MAX_VALUE;
-        int res=0;
-        for(int i=0;i<n-2;i++)
-        {
-            int p1=i+1;
-            int p2=n-1;
-           
-            while(p1<p2)
-            {
-                int sum=a[i]+a[p1]+a[p2];
-                if(sum==t)
-                {
-                    System.out.println(t);
+    static List<List<Integer>> threeSum(int[] nums) {
+
+        HashSet<List<Integer>> ans = new HashSet<>();
+        if(nums.length<3)
+            return new ArrayList(ans);
+        else{
+            Arrays.sort(nums);
+            for(int i=0;i<nums.length-2;i++){
+                if(i>0 && nums[i]==nums[i-1])continue;
+                int l = i+1,r = nums.length-1;
+                while(l<r){
+                    int sum = nums[l]+nums[r]+nums[i];
+                    if(sum==0)
+                        ans.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                    if(sum<0)
+                        l++;
+                    else
+                        r--;
                 }
-               if(Math.abs(t-sum)<csum)
-               {
-                   csum=t-sum;
-                   res=sum;
-               }
-
-                if(sum>t)p2--;
-                else p1++;
-
             }
         }
-        System.out.println(res);
+        return new ArrayList(ans);
+    }
+    public static void main(String[] args) {
+        int[] nums={-1,0,1,2,-1,-4};
+        System.out.print(threeSum(nums));
        
-
        
        
     }
