@@ -1,0 +1,25 @@
+class Solution {
+  public ListNode deleteDuplicates(ListNode head) {
+    if(head==null||head.next==null)
+        return head;
+   LinkedHashMap<Integer,Integer> nm=new LinkedHashMap<>();
+    for(ListNode cur=head;cur!=null;cur=cur.next)
+    {
+        nm.put(cur.val , nm.getOrDefault(cur.val,0)+1);
+    }
+    ListNode start=null,newest,prev=null;
+    for(int k:nm.keySet())
+    {
+        if(nm.get(k)==1)
+        {
+            newest=new ListNode(k);
+            if(start==null) //for first entry
+                start=newest;
+            else
+                prev.next=newest;
+            prev=newest;
+        }
+    }
+    return start;
+  }
+}
