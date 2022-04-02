@@ -1,3 +1,4 @@
+import java.util.*;
 public class AllSubsequencesOfAString {
     static void printSS(String s,String ans) {
        
@@ -10,10 +11,12 @@ public class AllSubsequencesOfAString {
         printSS(rest,ans+"");
         printSS(rest,ans+ch);
     }
+   
     public static void main(String[] args) {
         String s="abc";
         String ans="";
         printSS(s, ans);
+        printS(s);
     }
     
 }
