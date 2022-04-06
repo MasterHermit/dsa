@@ -16,7 +16,7 @@ public class AllSubsequencesOfAString {
         String s="abc";
         String ans="";
         printSS(s, ans);
-        printS(s);
+    
     }
     
 }
