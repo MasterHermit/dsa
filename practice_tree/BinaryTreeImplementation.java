@@ -95,19 +95,82 @@ public class BinaryTreeImplementation {
                 s.push(cur.left);
         }
     }
-    static void iterativeOptimized(Node root){
-        Stack<Node>s= new Stack<>();
-        Node cur=root;
-        
-        while(s.isEmpty()==false || cur!=null) {
-            while(cur!=null){
+
+    static void iterativeOptimized(Node root) {
+        Stack<Node> s = new Stack<>();
+        Node cur = root;
+
+        while (s.isEmpty() == false || cur != null) {
+            while (cur != null) {
                 System.out.println(cur.key);
-                if(cur.right!= null)s.push(cur.right);
-                cur= cur.left;
+                if (cur.right != null)
+                    s.push(cur.right);
+                cur = cur.left;
             }
-            if(s.isEmpty()==false)
-            cur=s.pop();
+            if (s.isEmpty() == false)
+                cur = s.pop();
         }
+    }
+
+    static void levelOrdTraversal(Node root) {
+        Queue<Node> q = new LinkedList<>();
+        if (root == null)
+            return;
+        q.add(root);
+        q.add(null);
+        while (q.size() > 1) {
+            Node cur = q.poll();
+            if (cur == null) {
+                System.out.println();
+                q.add(null);
+                continue;
+            }
+            System.out.print(cur.key + " ");
+            if (cur.left != null)
+                q.add(cur.left);
+            if (cur.right != null)
+                q.add(cur.right);
+        }
+
+    }
+
+    static void levelTraversalOptimized(Node root) {
+        if (root == null)
+            return;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (q.isEmpty() == false) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                Node cur = q.poll();
+                System.out.print(cur.key + " ");
+                if (cur.left != null)
+                    q.add(cur.left);
+                if (cur.right != null)
+                    q.add(cur.right);
+            }
+            System.out.println();
+        }
+    }
+
+    static void printNodesAt(Node root, int k) {
+        if (root == null)
+            return;
+        if (k == 0) {
+            System.out.print(root.key + " ");
+        }
+        printNodesAt(root.left, k - 1);
+        printNodesAt(root.right, k - 1);
+    }
+    public static int maxLevel=0;
+    static void printLeftView(Node root,int level){
+        if(root == null)return;
+       if(maxLevel<level){
+           System.out.print(root.key + " ");
+           maxLevel=level;
+       }
+       printLeftView(root.left, level+1);
+       printLeftView(root.right, level+1);
     }
 
     public static void main(String[] args) {
@@ -116,6 +179,9 @@ public class BinaryTreeImplementation {
         root.left = new Node(30);
         root.left.right = new Node(40);
         root.left.left = new Node(50);
+        root.right.left = new Node(60);
+        root.right.right = new Node(70);
+        root.left.right.right= new Node(80);
         // displayInorder(root);
         // displayPreorder(root);
         // displayPostorder(root);
@@ -124,8 +190,12 @@ public class BinaryTreeImplementation {
         // System.out.println(maxValue(root));
         // System.out.println(maxHeight(root));
         // iterativeInorder(root);
-        //iterativePreorder(root);
-        iterativeOptimized(root);
+        // iterativePreorder(root);
+        // iterativeOptimized(root);
+        // levelOrdTraversal(root);
+        //levelTraversalOptimized(root);
+        //printNodesAt(root,2);
+        printLeftView(root,1);
     }
 
 }
