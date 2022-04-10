@@ -251,6 +251,31 @@ public class BinaryTreeImplementation {
             System.out.println();
         }
     }
+    static void spiralTraversalOptimized(Node root){
+        if(root == null)return;
+        Stack<Node>s1= new Stack<>();
+        Stack<Node>s2=new  Stack<>();
+
+        s1.push(root);
+        while(s1.isEmpty()==false || s2.isEmpty()==false){
+        while(s1.isEmpty() == false){
+            Node cur=s1.pop();
+            System.out.print(cur.key+" ");
+            if(cur.left != null)s2.push(cur.left);
+           if(cur.right != null) s2.push(cur.right);
+           
+        }
+        System.out.println();
+        while(s2.isEmpty() == false){
+            Node cur=s2.pop();
+            System.out.print(cur.key+" ");
+            if(cur.right!= null)s1.push(cur.right);
+           if(cur.left!= null) s1.push(cur.left);
+          
+        }
+        System.out.println();
+    }
+    }
 
     public static void main(String[] args) {
         Node root = new Node(10);
@@ -278,7 +303,7 @@ public class BinaryTreeImplementation {
         // System.out.print(childrenSumProp(root));
         // balancedTree(root);
         //System.out.println(maxWidth(root));
-        spiralTraversal(root);
+        spiralTraversalOptimized(root);
     }
 
 }
