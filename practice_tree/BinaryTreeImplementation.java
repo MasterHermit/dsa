@@ -162,15 +162,94 @@ public class BinaryTreeImplementation {
         printNodesAt(root.left, k - 1);
         printNodesAt(root.right, k - 1);
     }
-    public static int maxLevel=0;
-    static void printLeftView(Node root,int level){
-        if(root == null)return;
-       if(maxLevel<level){
-           System.out.print(root.key + " ");
-           maxLevel=level;
-       }
-       printLeftView(root.left, level+1);
-       printLeftView(root.right, level+1);
+
+    public static int maxLevel = 0;
+
+    static void printLeftView(Node root, int level) {
+        if (root == null)
+            return;
+        if (maxLevel < level) {
+            System.out.print(root.key + " ");
+            maxLevel = level;
+        }
+        printLeftView(root.left, level + 1);
+        printLeftView(root.right, level + 1);
+    }
+
+    static boolean childrenSumProp(Node root) {
+        if (root == null)
+            return true;
+        if (root.left == null && root.right == null)
+            return true;
+        int sum = 0;
+        if (root.left != null)
+            sum += root.left.key;
+        if (root.right != null)
+            sum += root.right.key;
+
+        return (root.key == sum && childrenSumProp(root.left) && childrenSumProp(root.right));
+    }
+
+    static boolean balancedTree(Node root) {
+        if (root == null)
+            return true;
+        int l = maxHeight(root.left);
+        int r = maxHeight(root.right);
+        return (Math.abs(l - r) <= 1 && balancedTree(root.left) && balancedTree(root.right));
+
+    }
+
+    static int maxWidth(Node root) {
+        if (root == null)
+            return 0;
+        Queue<Node> q = new LinkedList<>();
+        int res = 0;
+        q.add(root);
+        while (q.isEmpty() == false) {
+            int count = q.size();
+            res = Math.max(res, count);
+            for (int i = 0; i < count; i++) {
+                Node cur = q.poll();
+                if (cur.left != null) {
+                    q.add(cur.left);
+                }
+                if (cur.right != null) {
+                    q.add(cur.right);
+                }
+            }
+        }
+        return res;
+    }
+
+    static void spiralTraversal(Node root) {
+        if (root == null)
+            return;
+        Queue<Node> q = new LinkedList<>();
+        Stack<Node> stack = new Stack<>();
+        q.add(root);
+        boolean reverse = false;
+        while (q.isEmpty() == false) {
+            int size=q.size();
+            for (int i = 0; i < size; i++) {
+                Node cur = q.poll();
+                if (!reverse) {
+                    System.out.print(cur.key + " ");
+                } else
+                    stack.push(cur);
+
+                if (cur.left != null)
+                    q.add(cur.left);
+                if (cur.right != null)
+                    q.add(cur.right);
+            }
+            if (reverse) {
+                while (!stack.isEmpty()) {
+                    System.out.print(stack.pop().key + " ");
+                }
+            }
+            reverse=!reverse;
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
@@ -181,7 +260,7 @@ public class BinaryTreeImplementation {
         root.left.left = new Node(50);
         root.right.left = new Node(60);
         root.right.right = new Node(70);
-        root.left.right.right= new Node(80);
+        root.left.right.right = new Node(80);
         // displayInorder(root);
         // displayPreorder(root);
         // displayPostorder(root);
@@ -193,9 +272,13 @@ public class BinaryTreeImplementation {
         // iterativePreorder(root);
         // iterativeOptimized(root);
         // levelOrdTraversal(root);
-        //levelTraversalOptimized(root);
-        //printNodesAt(root,2);
-        printLeftView(root,1);
+        // levelTraversalOptimized(root);
+        // printNodesAt(root,2);
+        // printLeftView(root,1);
+        // System.out.print(childrenSumProp(root));
+        // balancedTree(root);
+        //System.out.println(maxWidth(root));
+        spiralTraversal(root);
     }
 
 }
