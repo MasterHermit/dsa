@@ -1,0 +1,54 @@
+// Java program to find minimum number
+// which divide n to make it a perfect square.
+
+class GFG
+{
+	// Return the minimum number to be
+	// divided to make n a perfect square.
+	static int findMinNumber(int n)
+	{
+		int count = 0, ans = 1;
+	
+		// Since 2 is only even prime,
+		// compute its power separately.
+		while (n % 2 == 0)
+		{
+			count++;
+			n /= 2;
+		}
+	
+		// If count is odd, it must be removed by dividing
+		// n by prime number.
+		if (count % 2 == 1)
+			ans *= 2;
+	
+		for (int i = 3; i <= Math.sqrt(n); i += 2)
+		{
+			count = 0;
+			while (n % i == 0)
+			{
+				count++;
+				n /= i;
+			}
+	
+			// If count is odd, it must be removed by
+			// dividing n by prime number.
+			if (count % 2 == 1)
+				ans *= i;
+		}
+	
+		if (n > 2)
+			ans *= n;
+	
+		return ans;
+	}
+
+	// Driver code
+	public static void main (String[] args)
+	{
+		int n = 72;
+		System.out.println(findMinNumber(n));
+	}
+}
+
+// This code is contributed by Anant Agarwal.
