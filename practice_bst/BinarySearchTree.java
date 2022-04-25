@@ -116,6 +116,44 @@ public class BinarySearchTree {
         return cur;
     }
 
+    public void floor(int x) {
+        Node cur=floor(root, x);
+        System.out.println(cur.data);
+    }
+    public void ceil(int x){
+        Node cur=ceil(root,x);
+        System.out.println(cur.data);
+    }
+    public Node ceil(Node root,int x){
+        Node res=null;
+        while(root!=null){
+            if(root.data==x)return root;
+            else if(root.data<x)return root.right;
+            else {
+                res=root;
+                root=root.left;
+            }
+        }
+        return res;
+    }
+
+    public Node floor(Node root, int x) {
+        Node res = null;
+        while (root != null) {
+            if (root.data == x)
+                return root;
+            else if (root.data < x) {
+                res = root;
+                root = root.right;
+            } else {
+                root = root.left;
+            }
+
+        }
+        return res;
+
+    }
+
     public static void main(String[] args) {
         // Creating the object of BinarySearchTree class
         BinarySearchTree bst = new BinarySearchTree();
@@ -124,11 +162,13 @@ public class BinarySearchTree {
         bst.insert(4);
         bst.insert(1);
         bst.insert(3);
-        bst.insert(5);
+        bst.insert(7);
         bst.preorder();
         bst.search(4);
-        bst.delete(4);
+        // bst.delete(4);
         bst.preorder();
+        bst.floor(6);
+        bst.ceil(6);
     }
 
 }
