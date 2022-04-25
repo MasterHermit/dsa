@@ -61,8 +61,7 @@ public class BinaryTreeImplementation {
     static int maxHeight(Node root) {
         if (root == null)
             return 0;
-        else
-            return Math.max(maxHeight(root.left), maxHeight(root.right)) + 1;
+        return Math.max(maxHeight(root.left), maxHeight(root.right)) + 1;
     }
 
     static void iterativeInorder(Node root) {
@@ -229,7 +228,7 @@ public class BinaryTreeImplementation {
         q.add(root);
         boolean reverse = false;
         while (q.isEmpty() == false) {
-            int size=q.size();
+            int size = q.size();
             for (int i = 0; i < size; i++) {
                 Node cur = q.poll();
                 if (!reverse) {
@@ -247,34 +246,89 @@ public class BinaryTreeImplementation {
                     System.out.print(stack.pop().key + " ");
                 }
             }
-            reverse=!reverse;
+            reverse = !reverse;
             System.out.println();
         }
     }
-    static void spiralTraversalOptimized(Node root){
-        if(root == null)return;
-        Stack<Node>s1= new Stack<>();
-        Stack<Node>s2=new  Stack<>();
+
+    static void spiralTraversalOptimized(Node root) {
+        if (root == null)
+            return;
+        Stack<Node> s1 = new Stack<>();
+        Stack<Node> s2 = new Stack<>();
 
         s1.push(root);
-        while(s1.isEmpty()==false || s2.isEmpty()==false){
-        while(s1.isEmpty() == false){
-            Node cur=s1.pop();
-            System.out.print(cur.key+" ");
-            if(cur.left != null)s2.push(cur.left);
-           if(cur.right != null) s2.push(cur.right);
-           
+        while (s1.isEmpty() == false || s2.isEmpty() == false) {
+            while (s1.isEmpty() == false) {
+                Node cur = s1.pop();
+                System.out.print(cur.key + " ");
+                if (cur.left != null)
+                    s2.push(cur.left);
+                if (cur.right != null)
+                    s2.push(cur.right);
+
+            }
+            System.out.println();
+            while (s2.isEmpty() == false) {
+                Node cur = s2.pop();
+                System.out.print(cur.key + " ");
+                if (cur.right != null)
+                    s1.push(cur.right);
+                if (cur.left != null)
+                    s1.push(cur.left);
+
+            }
+            System.out.println();
         }
-        System.out.println();
-        while(s2.isEmpty() == false){
-            Node cur=s2.pop();
-            System.out.print(cur.key+" ");
-            if(cur.right!= null)s1.push(cur.right);
-           if(cur.left!= null) s1.push(cur.left);
-          
-        }
-        System.out.println();
     }
+
+    public static int r = 0;
+
+    static int maxDiameter(Node root) {
+        if (root == null)
+            return 0;
+
+        int lh = maxDiameter(root.left);
+        int rh = maxDiameter(root.right);
+        r = Math.max(r, 1 + lh + rh);
+        return 1 + Math.max(lh, rh);
+
+    }
+
+    static int getSizeFFBtree(Node root) {
+        if (root == null)
+            return 0;
+        Node cur = root;
+        int l = 0;
+        while (cur != null) {
+            l++;
+            cur = cur.left;
+        }
+        cur = root;
+        int r = 0;
+        while (cur != null) {
+            r++;
+            cur = cur.right;
+        }
+        if (l == r)
+            return (int) Math.pow(2, l) - 1;
+        else
+            return 1 + getSizeFFBtree(root.left) + getSizeFFBtree(root.right);
+
+    }
+
+    static int empty = -1;
+    static ArrayList<Integer> list = new ArrayList<Integer>();
+
+    static void serilaize(Node root, ArrayList<Integer> l) {
+        if (root == null) {
+            l.add(empty);
+            return;
+        }
+
+        l.add(root.key);
+        serilaize(root.left, l);
+        serilaize(root.right, l);
     }
 
     public static void main(String[] args) {
@@ -286,6 +340,9 @@ public class BinaryTreeImplementation {
         root.right.left = new Node(60);
         root.right.right = new Node(70);
         root.left.right.right = new Node(80);
+        root.left.right.left = new Node(90);
+        root.left.left.right = new Node(100);
+        root.left.left.left = new Node(110);
         // displayInorder(root);
         // displayPreorder(root);
         // displayPostorder(root);
@@ -302,8 +359,14 @@ public class BinaryTreeImplementation {
         // printLeftView(root,1);
         // System.out.print(childrenSumProp(root));
         // balancedTree(root);
-        //System.out.println(maxWidth(root));
-        spiralTraversalOptimized(root);
+        // System.out.println(maxWidth(root));
+        // spiralTraversalOptimized(root);
+        // System.out.println(maxDiameter(root));
+        // System.out.println(r);
+        //System.out.println(getSizeFFBtree(root));
+        serilaize(root,list);
+        System.out.println(list);
+
     }
 
 }
