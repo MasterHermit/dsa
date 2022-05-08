@@ -14,6 +14,22 @@ public class AdjancecyList {
             System.out.println();
         }
     }
+    static void bfs(ArrayList<ArrayList<Integer>> al,int v,int s){
+        boolean[] arr=new boolean[v+1];
+        Queue<Integer> q = new LinkedList<>();
+        q.add(s);
+        arr[s]=true;
+        while(q.isEmpty() == false){
+            int u=q.poll();
+            System.out.print(u+" ");
+            for(int i:al.get(u)){
+                if(arr[i]==false){
+                    q.add(i);
+                    arr[i]=true;
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         int v = 5;
         ArrayList<ArrayList<Integer>> al = new ArrayList<ArrayList<Integer>>(v);
@@ -25,6 +41,8 @@ public class AdjancecyList {
             addEdge(al,1,2);
             addEdge(al,1,3);
             printGraph(al);
+            int s=0;
+            bfs(al, v, s);
         
             
     }
