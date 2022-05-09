@@ -64,6 +64,29 @@ public class AdjancecyList {
 
     }
 
+    static boolean checkCycle(ArrayList<ArrayList<Integer>> al, boolean[] arr, int s, int p) {
+        arr[s] = true;
+        for (int u : al.get(s)) {
+            if (arr[u] == false) {
+                if (checkCycle(al, arr, u, s))
+                    return true;
+            } else if (u != p) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    static boolean isCycle(ArrayList<ArrayList<Integer>> al, int v) {
+        boolean[] arr = new boolean[v];
+        for (int i = 0; i < v; i++)
+            if (arr[i] == false)
+                if (checkCycle(al, arr, i, -1) == true)
+                    return true;
+        return false;
+    }
+
     public static void main(String[] args) {
         int v = 5;
         ArrayList<ArrayList<Integer>> al = new ArrayList<ArrayList<Integer>>(v);
@@ -79,9 +102,10 @@ public class AdjancecyList {
         addEdge(al, 1, 4);
         // printGraph(al);
         int s = 0;
-        preBfs(al, v);
+       // preBfs(al, v);
         System.out.println();
-        preDfs(al, v);
+       // preDfs(al, v);
+       System.out.println(isCycle(al,v)); 
 
     }
 }
