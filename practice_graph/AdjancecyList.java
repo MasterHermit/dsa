@@ -38,6 +38,19 @@ public class AdjancecyList {
             }
         }
     }
+    static void dfs(ArrayList<ArrayList<Integer>> al,int s,boolean[] arr){
+        arr[s]=true;
+        System.out.println(s);
+        for(int u:al.get(s)){
+            if(arr[u]==false){
+                dfs(al, u, arr);
+            }
+        }
+    }
+    static void preDfs(ArrayList<ArrayList<Integer>> al,int v,int s){
+        boolean[] arr=new boolean[v+1];
+        bfs(al, s, arr);
+    }
     public static void main(String[] args) {
         int v = 5;
         ArrayList<ArrayList<Integer>> al = new ArrayList<ArrayList<Integer>>(v);
@@ -46,12 +59,16 @@ public class AdjancecyList {
 
             addEdge(al,0,1);
             addEdge(al,0,2);
-            addEdge(al,1,4);
             addEdge(al,1,3);
-            printGraph(al);
+            addEdge(al,2,3);
+            addEdge(al,3,4);
+            
+            addEdge(al,1,4);
+            //printGraph(al);
             int s=0;
-            preBfs(al, v);
+           // preBfs(al, v);
+           preDfs(al,v,4);
         
             
     }
-}
+} 
