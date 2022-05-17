@@ -89,24 +89,26 @@ public class AdjancecyList {
     
 
     public static void main(String[] args) {
-        int v = 5;
+        int v = 6;
         ArrayList<ArrayList<Integer>> al = new ArrayList<ArrayList<Integer>>(v);
         for (int i = 0; i < v; i++)
             al.add(new ArrayList<Integer>());
 
-        addEdge(al, 0, 1);
-        addEdge(al, 0, 2);
-        addEdge(al, 1, 3);
-        addEdge(al, 2, 3);
-        addEdge(al, 3, 4);
-
-        addEdge(al, 1, 4);
-        // printGraph(al);
+            addEdge(al,0,1);
+            addEdge(al,0,2);
+            addEdge(al,0,3);
+            addEdge(al,1,4);
+            addEdge(al,1,5);
+            addEdge(al,4,2);
+            addEdge(al,3,5);
+            addEdge(al,2,5);
+            addEdge(al,5,1);
+         printGraph(al);
         int s = 0;
        // preBfs(al, v);
-        System.out.println();
+      //  System.out.println();
        // preDfs(al, v);
-       System.out.println(isCycle(al,v)); 
+      // System.out.println(isCycle(al,v)); 
 
     }
 }
