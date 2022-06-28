@@ -18,7 +18,7 @@ public class MaxValueByRotatingTheArray {
     }
 
     public static void main(String[] args) {
-        int[] arr = { 1, 20, 2, 10 };
+        int[] arr = { 8, 3, 2, 1 };
         int sum = findMax(arr);
         System.out.println(sum);
     }
