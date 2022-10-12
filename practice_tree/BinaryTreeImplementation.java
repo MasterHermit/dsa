@@ -331,6 +331,24 @@ public class BinaryTreeImplementation {
         serilaize(root.right, l);
     }
 
+    static int index = 0;
+
+    static Node deSerilaize(ArrayList<Integer> l) {
+        if (index == l.size())
+            return null;
+
+        int val = l.get(index);
+        index++;
+        if (val == empty)
+            return null;
+
+        Node root = new Node(val);
+        root.left = deSerilaize(l);
+        root.right = deSerilaize(l);
+        return root;
+
+    }
+
     public static void main(String[] args) {
         Node root = new Node(10);
         root.right = new Node(20);
@@ -363,9 +381,9 @@ public class BinaryTreeImplementation {
         // spiralTraversalOptimized(root);
         // System.out.println(maxDiameter(root));
         // System.out.println(r);
-        //System.out.println(getSizeFFBtree(root));
-        serilaize(root,list);
-        System.out.println(list);
+        // System.out.println(getSizeFFBtree(root));
+       // serilaize(root, list);
+       // System.out.println(list);
 
     }
 
