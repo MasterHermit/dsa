@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class BST_from_sorted_array {
     private static class Node {
         int data;
@@ -98,6 +100,45 @@ public class BST_from_sorted_array {
         }
     }
 
+    public static int sum = 0;
+
+    static void replace_larger_sum(Node root) {
+        if (root == null)
+            return;
+
+        replace_larger_sum(root.right);
+        int od = root.data;
+        root.data = sum;
+        sum += od;
+        replace_larger_sum(root.left);
+
+    }
+
+    static int lowest_common_ancestor(Node root, int x, int y) {
+
+        if (root.data < x && root.data < y) {
+            return lowest_common_ancestor(root.right, x, y);
+        } else if (root.data > x && root.data > y) {
+            return lowest_common_ancestor(root.left, x, y);
+        } else
+            return root.data;
+
+    }
+
+    static void print_range(Node root, int min, int max) {
+        if (root == null)
+            return;
+        if (root.data < min && root.data < max) {
+            print_range(root.right, min, max);
+        } else if (root.data > min && root.data > max) {
+            print_range(root.left, min, max);
+        } else {
+            print_range(root.left, min, max);
+            System.out.println(root.data);
+            print_range(root.right, min, max);
+        }
+    }
+
     static void display(Node root) {
         if (root == null)
             return;
@@ -110,16 +151,26 @@ public class BST_from_sorted_array {
     public static void main(String[] args) {
         Node root = null;
 
-        int[] arr = { 10, 20, 23, 25, 30, 56, 71 };
+        int[] arr = { 12, 25, 30, 37, 40, 50, 55, 60, 61, 62, 70, 71, 74, 75, 87 };
         root = construct(arr, 0, arr.length - 1);
 
-        insert(100, root);
-        delete(30, root);
+        // insert(100, root);
+        // delete(30, root);
         display(root);
         System.out.println();
-        System.out.println(size(root));
-        System.out.println(maxNo(root));
-        System.out.println(minNo(root));
+        // System.out.println();
+        // System.out.println(size(root));
+        // System.out.println(maxNo(root));
+        // System.out.println(minNo(root));
+
+        // replace_larger_sum(root);
+
+        // int lcs = lowest_common_ancestor(root, 61, 71);
+        // System.out.println(lcs);
+
+        print_range(root, 30, 70);
+
+        // display(root);
     }
 
 }
